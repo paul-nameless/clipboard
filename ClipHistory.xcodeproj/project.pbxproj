@@ -11,7 +11,40 @@
 		DA3BA96520C049F500AED1A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BA96420C049F500AED1A6 /* ViewController.swift */; };
 		DA3BA96720C049F900AED1A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA3BA96620C049F900AED1A6 /* Assets.xcassets */; };
 		DA3BA96A20C049F900AED1A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA3BA96820C049F900AED1A6 /* Main.storyboard */; };
+		DA3BA98220C151BB00AED1A6 /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3BA98020C1518A00AED1A6 /* Magnet.framework */; };
+		DA3BA98320C151BB00AED1A6 /* Magnet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA3BA98020C1518A00AED1A6 /* Magnet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA3BA98620C151C800AED1A6 /* Magnet.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA3BA98520C151C800AED1A6 /* Magnet.framework.dSYM */; };
+		DA3BA98920C16A3600AED1A6 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA3BA98820C16A3600AED1A6 /* Preferences.storyboard */; };
+		DA3BA98B20C170B300AED1A6 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BA98A20C170B300AED1A6 /* PreferencesViewController.swift */; };
+		DA3BA98D20C1721600AED1A6 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3BA98C20C1721600AED1A6 /* PreferencesWindowController.swift */; };
+		DACE048320C1E96300AEBE55 /* ClipboardHistory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DACE048220C1E96300AEBE55 /* ClipboardHistory.storyboard */; };
+		DACE048520C1EE2F00AEBE55 /* ClipboardHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE048420C1EE2F00AEBE55 /* ClipboardHistoryViewController.swift */; };
+		DACE048720C1EEBF00AEBE55 /* ClipboardHistoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE048620C1EEBF00AEBE55 /* ClipboardHistoryWindowController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DA3BA97C20C134AB00AED1A6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				DA3BA98620C151C800AED1A6 /* Magnet.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA3BA98420C151BB00AED1A6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DA3BA98320C151BB00AED1A6 /* Magnet.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DA3BA95F20C049F500AED1A6 /* ClipHistory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipHistory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,6 +54,15 @@
 		DA3BA96920C049F900AED1A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA3BA96B20C049F900AED1A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA3BA96C20C049F900AED1A6 /* ClipHistory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClipHistory.entitlements; sourceTree = "<group>"; };
+		DA3BA98020C1518A00AED1A6 /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
+		DA3BA98120C1519A00AED1A6 /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
+		DA3BA98520C151C800AED1A6 /* Magnet.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Magnet.framework.dSYM; path = Carthage/Build/Mac/Magnet.framework.dSYM; sourceTree = "<group>"; };
+		DA3BA98820C16A3600AED1A6 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		DA3BA98A20C170B300AED1A6 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		DA3BA98C20C1721600AED1A6 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		DACE048220C1E96300AEBE55 /* ClipboardHistory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClipboardHistory.storyboard; sourceTree = "<group>"; };
+		DACE048420C1EE2F00AEBE55 /* ClipboardHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryViewController.swift; sourceTree = "<group>"; };
+		DACE048620C1EEBF00AEBE55 /* ClipboardHistoryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryWindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA3BA98220C151BB00AED1A6 /* Magnet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +80,11 @@
 		DA3BA95620C049F500AED1A6 = {
 			isa = PBXGroup;
 			children = (
+				DACE048120C1E92000AEBE55 /* ClipboardHistoryWindow */,
+				DA3BA98720C16A0F00AED1A6 /* PreferencesWindow */,
+				DA3BA98520C151C800AED1A6 /* Magnet.framework.dSYM */,
+				DA3BA98020C1518A00AED1A6 /* Magnet.framework */,
+				DA3BA98120C1519A00AED1A6 /* Magnet.framework */,
 				DA3BA96120C049F500AED1A6 /* ClipHistory */,
 				DA3BA96020C049F500AED1A6 /* Products */,
 			);
@@ -63,6 +111,26 @@
 			path = ClipHistory;
 			sourceTree = "<group>";
 		};
+		DA3BA98720C16A0F00AED1A6 /* PreferencesWindow */ = {
+			isa = PBXGroup;
+			children = (
+				DA3BA98820C16A3600AED1A6 /* Preferences.storyboard */,
+				DA3BA98A20C170B300AED1A6 /* PreferencesViewController.swift */,
+				DA3BA98C20C1721600AED1A6 /* PreferencesWindowController.swift */,
+			);
+			path = PreferencesWindow;
+			sourceTree = "<group>";
+		};
+		DACE048120C1E92000AEBE55 /* ClipboardHistoryWindow */ = {
+			isa = PBXGroup;
+			children = (
+				DACE048220C1E96300AEBE55 /* ClipboardHistory.storyboard */,
+				DACE048420C1EE2F00AEBE55 /* ClipboardHistoryViewController.swift */,
+				DACE048620C1EEBF00AEBE55 /* ClipboardHistoryWindowController.swift */,
+			);
+			path = ClipboardHistoryWindow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -73,6 +141,8 @@
 				DA3BA95B20C049F500AED1A6 /* Sources */,
 				DA3BA95C20C049F500AED1A6 /* Frameworks */,
 				DA3BA95D20C049F500AED1A6 /* Resources */,
+				DA3BA97C20C134AB00AED1A6 /* CopyFiles */,
+				DA3BA98420C151BB00AED1A6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -121,6 +191,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DACE048320C1E96300AEBE55 /* ClipboardHistory.storyboard in Resources */,
+				DA3BA98920C16A3600AED1A6 /* Preferences.storyboard in Resources */,
 				DA3BA96720C049F900AED1A6 /* Assets.xcassets in Resources */,
 				DA3BA96A20C049F900AED1A6 /* Main.storyboard in Resources */,
 			);
@@ -135,6 +207,10 @@
 			files = (
 				DA3BA96520C049F500AED1A6 /* ViewController.swift in Sources */,
 				DA3BA96320C049F500AED1A6 /* AppDelegate.swift in Sources */,
+				DA3BA98D20C1721600AED1A6 /* PreferencesWindowController.swift in Sources */,
+				DACE048720C1EEBF00AEBE55 /* ClipboardHistoryWindowController.swift in Sources */,
+				DACE048520C1EE2F00AEBE55 /* ClipboardHistoryViewController.swift in Sources */,
+				DA3BA98B20C170B300AED1A6 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +348,10 @@
 				CODE_SIGN_ENTITLEMENTS = ClipHistory/ClipHistory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ClipHistory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -290,6 +370,10 @@
 				CODE_SIGN_ENTITLEMENTS = ClipHistory/ClipHistory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = ClipHistory/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

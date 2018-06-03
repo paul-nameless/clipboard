@@ -7,12 +7,12 @@
 //
 
 import Cocoa
+import HotKey
 
 class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -22,6 +22,19 @@ class ViewController: NSViewController {
         }
     }
 
-
 }
 
+extension ViewController {
+    // MARK: Storyboard instantiation
+    static func freshController() -> ViewController {
+        //1.
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        //2.
+        let identifier = NSStoryboard.SceneIdentifier(rawValue: "ViewController")
+        //3.
+        guard let viewcontroller = storyboard.instantiateController(withIdentifier: identifier) as? ViewController else {
+            fatalError("Why cant i find ViewController? - Check Main.storyboard")
+        }
+        return viewcontroller
+    }
+}
