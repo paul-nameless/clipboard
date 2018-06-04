@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         buildMenu()
         setupShortcut()
        
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkClipboard(_:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.checkClipboard(_:)), userInfo: nil, repeats: true)
 
 //        // get a global concurrent queue
 //        let background = DispatchQueue.global()
@@ -44,10 +44,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     @objc func hotKeyHandler() {
-        print("Clipboards:")
-        for (clipboard, timestamp) in stack.items {
-            print("\(clipboard) = \(timestamp)")
-        }
+        showClipboardHistory()
+//        print("Clipboards:")
+//        for (clipboard, timestamp) in stack.items {
+//            print("\(clipboard) = \(timestamp)")
+//        }
     }
     
     func setupShortcut() {
@@ -75,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func checkClipboard(_ sender: Any?) {
         if self.clipboardChangeCount != NSPasteboard.general.changeCount {
             self.clipboardChangeCount = NSPasteboard.general.changeCount
-            print("Clipboard value change. Updating values")
+            print("Clipboard value changed, updating values")
             if let clipboard = clipboardContent() {
                 stack.push(clipboard)
                 buildMenu()
@@ -99,12 +100,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let clipboards = stack.items.sorted { a, b in a.value > b.value }.enumerated().filter { i, e in i < 10 }
         for (i, elem) in clipboards {
-            menu.addItem(NSMenuItem(title: trunc(string: elem.key, length: 44, trailing: "..."),
-                                    action: #selector(AppDelegate.paste(_:)),
-                                    keyEquivalent: "\(i + 1)"))
+            let menuItem = NSMenuItem(title: trunc(string: elem.key, length: 44, trailing: "..."),
+                                      action: #selector(AppDelegate.pasteElem(_:)),
+                                      keyEquivalent: "\(i + 1)")
+            menuItem.tag = i
+            menu.addItem(menuItem)
         }
         menu.addItem(NSMenuItem(title: "ClipboardHistory",
-                                action: #selector(AppDelegate.showClipboardHistory(_:)),
+                                action: #selector(AppDelegate.showClipboardHistoryHandler(_:)),
                                 keyEquivalent: "H"))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Clear", action: #selector(AppDelegate.clear(_:)), keyEquivalent: ""))
@@ -127,31 +130,54 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // button
     @objc func showPreferences(_ sender: Any?) {
-        if !(preferencesController != nil) {
+        if preferencesController == nil {
             let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Preferences"), bundle: nil)
             preferencesController = storyboard.instantiateInitialController() as? NSWindowController
         }
-        
+
         if preferencesController != nil {
-            preferencesController!.showWindow(sender)
+            preferencesController!.showWindow(nil)
+//            print("Show pref")
         }
     }
     
     // button
-    @objc func showClipboardHistory(_ sender: Any?) {
-        if !(clipboardHistoryController != nil) {
+    @objc func showClipboardHistoryHandler(_ sender: Any?) {
+        showClipboardHistory()
+    }
+
+    func showClipboardHistory() {
+        if clipboardHistoryController == nil {
             let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "ClipboardHistory"), bundle: nil)
-            clipboardHistoryController = storyboard.instantiateInitialController() as? NSWindowController
+            clipboardHistoryController = storyboard.instantiateInitialController() as? ClipboardHistoryWindowController
+//            clipboardHistoryController.stack = self.stack
         }
         
-        if clipboardHistoryController != nil {
-            clipboardHistoryController!.showWindow(sender)
+        if clipboardHistoryController    != nil {
+//            print("Show hist")
+            clipboardHistoryController!.showWindow(nil)
+            clipboardHistoryController?.window?.orderFront(clipboardHistoryController)
+            NSApp.activate(ignoringOtherApps: true)
         }
     }
     
-    @objc func pasteElem(_ sender: Any?, clipboard: String) {
-        NSPasteboard.general.setString(clipboard, forType: NSPasteboard.PasteboardType(clipboard))
-        self.send(self.KEY_V, useCommandFlag: true)
+    @objc func pasteElem(_ sender: Any?) {
+        let menuItem = sender as! NSMenuItem
+        let index = menuItem.tag
+        pasteByIndex(index)
+    }
+    
+    func pasteByIndex(_ index: Int) {
+        if let content = stack.get(index: index) {
+            print("Content \(content)")
+            let pb = NSPasteboard.init(name: NSPasteboard.Name.general)
+            pb.clearContents()
+            pb.string(forType: NSPasteboard.PasteboardType.string)
+            pb.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+            let success = pb.setString(content, forType: NSPasteboard.PasteboardType.string)
+            print("Success \(success)")
+            self.send(self.KEY_V, useCommandFlag: true)
+        }
     }
 
     @objc func paste(_ sender: Any?) {
@@ -190,7 +216,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 struct ClipboardStack {
     
     var items: [String: Double] = [:]
-    let maxCapacity = 4
+    let maxCapacity = 100
     
     mutating func trim() {
         if (items.count > maxCapacity) {
@@ -210,6 +236,18 @@ struct ClipboardStack {
     
     mutating func last() -> String? {
         return items.max { a, b in a.value > b.value }?.key
+    }
+    
+    mutating func get(index: Int) -> String? {
+        let sortedItems = items.sorted { a, b in a.value > b.value }
+        if index < sortedItems.count {
+            return sortedItems[index].key
+        }
+        return nil
+    }
+    
+    mutating func getSorted() -> [(key: String, value: Double)] {
+        return items.sorted { a, b in a.value > b.value }
     }
 }
 

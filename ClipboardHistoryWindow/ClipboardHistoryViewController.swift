@@ -10,33 +10,62 @@ import Cocoa
 
 class ClipboardHistoryViewController: NSViewController {
     
-    var items: [[String: Double]?] = [
-        ["clipboard1": 1528004330.583657],
-        ["clipboard2": 1528004330.583657],
-        ["clipboard3": 1528004330.583657]
-    ]
+//    var items: [(key: String, value: Double)?] = []
+//    var stack: ClipboardStack?
+    var appDelegate: AppDelegate? = nil
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var tableView: NSTableView!
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
         self.parent?.view.window?.title = self.title!
 
         self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height)
         self.view.layer?.cornerRadius = 24
+        
+        appDelegate = NSApplication.shared.delegate as? AppDelegate
+//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+//        stack = appDelegate.stack
+
 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 44
         scrollView.wantsLayer = true
         scrollView.layer?.cornerRadius = 10
+
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
-
+//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+//        items = appDelegate.stack.getSorted()
+        self.tableView.reloadData()
+        let indexSet = IndexSet.init(integer: 0)
+        tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
+        print("Here, updating")
         self.parent?.view.window?.title = self.title!
+    }
+    
+    override func keyDown(with event: NSEvent) {
+        if event.keyCode == 0x24 {
+            // enter
+            print("Handled enter press")
+//            self.parent?.view.window?.close()
+            NSApp.hide(nil)
+            let index = tableView.selectedRow
+            if index == -1 {
+                return
+            }
+            let appDelegate = NSApplication.shared.delegate as! AppDelegate
+            appDelegate.pasteByIndex(index)
+        } else if event.keyCode == 0x35 {
+            // escape
+//            self.parent?.view.window?.close()
+            NSApp.hide(nil)
+        }
     }
 }
 
@@ -44,7 +73,8 @@ class ClipboardHistoryViewController: NSViewController {
 extension ClipboardHistoryViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return items.count 
+//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+        return appDelegate?.stack.items.count ?? 0
     }
     
 }
@@ -92,17 +122,25 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
         dateFormatter.timeStyle = .long
         
         // 1
-        guard let item = items[row] else {
+//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
+//        if row >= appDelegate?.stack.items?.count {
+//            return nil
+//        }
+        guard let item = appDelegate?.stack.getSorted()[row] else {
             return nil
         }
-        
+
+//        guard let item = stack?.getSorted()[row] else {
+//            return nil
+//        }
+//
         // 2
         if tableColumn == tableView.tableColumns[0] {
-            text = (item.first?.key)!
+            text = item.key
             cellIdentifier = CellId.clipboardCell
         } else if tableColumn == tableView.tableColumns[1] {
 //            text = dateFormatter.string(from: Date(timeIntervalSince1970: item.first!.value))
-            text = "\(item.first!.value)"
+            text = "\(item.value)"
             cellIdentifier = CellId.timestampCell
         } else if tableColumn == tableView.tableColumns[2] {
             if row < 10 {
@@ -127,7 +165,7 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
 
 
 extension NSTextFieldCell {
-    override open func drawingRect(forBounds rect: NSRect) -> NSRect {
-        return NSRect(x: rect.minX + 10, y: rect.minY + 10, width: rect.width, height: 44)
-    }
+//    override open func drawingRect(forBounds rect: NSRect) -> NSRect {
+//        return NSRect(x: rect.minX + 10, y: rect.minY + 10, width: rect.width, height: 44)
+//    }
 }
