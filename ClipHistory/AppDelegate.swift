@@ -73,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //    }
     
     @objc func checkClipboard(_ sender: Any?) {
-        if (self.clipboardChangeCount != NSPasteboard.general.changeCount) {
+        if self.clipboardChangeCount != NSPasteboard.general.changeCount {
             self.clipboardChangeCount = NSPasteboard.general.changeCount
             print("Clipboard value change. Updating values")
             if let clipboard = clipboardContent() {
@@ -107,10 +107,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                 action: #selector(AppDelegate.showClipboardHistory(_:)),
                                 keyEquivalent: "H"))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Clear", action: #selector(AppDelegate.clear(_:)), keyEquivalent: "l"))
+        menu.addItem(NSMenuItem(title: "Clear", action: #selector(AppDelegate.clear(_:)), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Preferences...",
                                 action: #selector(AppDelegate.showPreferences(_:)), keyEquivalent: ","))
-        menu.addItem(NSMenuItem(title: "About", action: #selector(AppDelegate.showAbout(_:)), keyEquivalent: "A"))
+        menu.addItem(NSMenuItem(title: "About", action: #selector(AppDelegate.showAbout(_:)), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "Q"))
         
@@ -132,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             preferencesController = storyboard.instantiateInitialController() as? NSWindowController
         }
         
-        if (preferencesController != nil) {
+        if preferencesController != nil {
             preferencesController!.showWindow(sender)
         }
     }
@@ -144,7 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             clipboardHistoryController = storyboard.instantiateInitialController() as? NSWindowController
         }
         
-        if (clipboardHistoryController != nil) {
+        if clipboardHistoryController != nil {
             clipboardHistoryController!.showWindow(sender)
         }
     }
@@ -214,3 +214,27 @@ struct ClipboardStack {
 }
 
 
+
+// Utils
+//extension Date {
+//
+//    func getElapsedInterval() -> String {
+//
+//        let interval = Calendar.current.dateComponents([.year, .month, .day], from: self, to: Date())
+//
+//        if let year = interval.year, year > 0 {
+//            return year == 1 ? "\(year)" + " " + "year" :
+//                "\(year)" + " " + "years"
+//        } else if let month = interval.month, month > 0 {
+//            return month == 1 ? "\(month)" + " " + "month" :
+//                "\(month)" + " " + "months"
+//        } else if let day = interval.day, day > 0 {
+//            return day == 1 ? "\(day)" + " " + "day" :
+//                "\(day)" + " " + "days"
+//        } else {
+//            return "a moment ago"
+//
+//        }
+//
+//    }
+//}

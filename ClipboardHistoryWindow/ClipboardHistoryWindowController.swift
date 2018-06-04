@@ -13,7 +13,7 @@ class ClipboardHistoryWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        window?.isOpaque = false
+//        window?.isOpaque = false
         window?.backgroundColor = .clear
     }
     
