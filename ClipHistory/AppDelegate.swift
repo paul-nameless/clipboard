@@ -42,13 +42,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func iHaveFocus() -> Bool {
+        let win = NSApplication.shared.keyWindow
+        if (win != nil) {
+            let vc = win!.contentViewController as? ClipboardHistoryViewController
+            if (vc != nil) {
+                return true
+            }
+        }
+        return false
+    }
     
     @objc func hotKeyHandler() {
-        showClipboardHistory()
-//        print("Clipboards:")
-//        for (clipboard, timestamp) in stack.items {
-//            print("\(clipboard) = \(timestamp)")
-//        }
+        if iHaveFocus() {
+            NSApp.hide(nil)
+        } else {
+            showClipboardHistory()
+        }
     }
     
     func setupShortcut() {
@@ -65,14 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func clipboardContent() -> String? {
         return NSPasteboard.general.pasteboardItems?.first?.string(forType: .string)
     }
-//
-//    @objc func printQuote(_ sender: Any?) {
-//        print("Checking")
-////        if let clip = clipboardContent() {
-////            print("Clipboard = \(clip)")
-////        }
-//    }
-    
+
     @objc func checkClipboard(_ sender: Any?) {
         if self.clipboardChangeCount != NSPasteboard.general.changeCount {
             self.clipboardChangeCount = NSPasteboard.general.changeCount

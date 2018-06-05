@@ -35,7 +35,6 @@ class ClipboardHistoryViewController: NSViewController {
         tableView.rowHeight = 44
         scrollView.wantsLayer = true
         scrollView.layer?.cornerRadius = 10
-
     }
 
     override func viewDidAppear() {
@@ -87,7 +86,7 @@ class MyNSTableRowView: NSTableRowView {
         self.layer?.cornerRadius = 16
         if self.selectionHighlightStyle != .none {
             let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-            NSColor(calibratedWhite: 0.8, alpha: 1).setFill()
+            NSColor(calibratedWhite: 0.81, alpha: 1).setFill()
             let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
             selectionPath.fill()
         }
@@ -106,7 +105,7 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         return MyNSTableRowView()
     }
-//
+
 //    func tableViewSelectionDidChange(_ notification: Notification) {
 //        let index = tableView.selectedRow
 //        let rowView = tableView.rowView(atRow: index, makeIfNecessary: false)
@@ -114,6 +113,12 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
 //    }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        
+//        let c: NSTextFieldCell? = (tableColumn?.dataCell as? NSTextFieldCell)!
+//        if let c2 = c {
+//            print("Here")
+//            c2.textColor = NSColor.black
+//        }
         var text: String = ""
         var cellIdentifier: String = ""
         
@@ -139,6 +144,9 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier),
                                          owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
+//            cell.textField?.textColor = NSColor.black
+//            cell.backgroundStyle = .light
+            
             return cell
         }
         return nil
