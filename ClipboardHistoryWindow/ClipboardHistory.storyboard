@@ -10,7 +10,7 @@
             <objects>
                 <windowController id="BeV-Dr-FcJ" customClass="ClipboardHistoryWindowController" customModule="ClipHistory" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Clipboard" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="lol-Ci-NpO">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="462" y="310" width="564" height="326"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -43,14 +43,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="515" height="282"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" columnReordering="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="JF6-kn-Vol">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="JF6-kn-Vol">
                                             <rect key="frame" x="0.0" y="0.0" width="515" height="282"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="clipboard" editable="NO" width="250" minWidth="40" maxWidth="1000" id="UwF-Dg-CnZ">
+                                                <tableColumn identifier="clipboard" editable="NO" width="375" minWidth="40" maxWidth="1000" id="UwF-Dg-CnZ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Clipboard HIstory">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -64,11 +64,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="lVH-if-Kmd">
-                                                            <rect key="frame" x="1" y="1" width="250" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="375" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oxb-F2-mg3">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="avu-st-h7h">
                                                                         <font key="font" metaFont="system"/>
@@ -83,7 +83,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="timestamp" width="200" minWidth="10" maxWidth="3.4028234663852886e+38" id="heE-Vf-E21">
+                                                <tableColumn identifier="timestamp" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="heE-Vf-E21">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Timestamp">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -97,11 +97,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="atk-ij-yUm">
-                                                            <rect key="frame" x="254" y="1" width="200" height="17"/>
+                                                            <rect key="frame" x="379" y="1" width="100" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VgF-ZO-Gj6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="amt-nn-nOj">
                                                                         <font key="font" metaFont="system"/>
@@ -116,7 +116,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="" width="32" minWidth="10" maxWidth="3.4028234663852886e+38" id="mYB-0D-D7I">
+                                                <tableColumn identifier="shortcut" width="30" minWidth="20" maxWidth="3.4028234663852886e+38" id="mYB-0D-D7I">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Shortcut">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -130,11 +130,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="eqL-Ox-CX7">
-                                                            <rect key="frame" x="457" y="1" width="32" height="17"/>
+                                                            <rect key="frame" x="482" y="1" width="30" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nkO-XL-Tyg">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="T9P-QX-GGm">
                                                                         <font key="font" metaFont="system"/>

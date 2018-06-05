@@ -100,9 +100,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let clipboards = stack.items.sorted { a, b in a.value > b.value }.enumerated().filter { i, e in i < 10 }
         for (i, elem) in clipboards {
+            let key = indexToButton(i)
+        
             let menuItem = NSMenuItem(title: trunc(string: elem.key, length: 44, trailing: "..."),
                                       action: #selector(AppDelegate.pasteElem(_:)),
-                                      keyEquivalent: "\(i + 1)")
+                                      keyEquivalent: key)
             menuItem.tag = i
             menu.addItem(menuItem)
         }
@@ -217,6 +219,16 @@ struct ClipboardStack {
     
     var items: [String: Double] = [:]
     let maxCapacity = 100
+    let KEY = "clipboardStack"
+    
+    init() {
+        let stackObject = UserDefaults.standard.object(forKey: self.KEY)
+        if let stack = stackObject as? [String: Double] {
+            self.items = stack
+        } else {
+            self.items = [:]
+        }
+    }
     
     mutating func trim() {
         if (items.count > maxCapacity) {
@@ -232,6 +244,7 @@ struct ClipboardStack {
     mutating func push(_ item: String) {
         items[item] = Date().timeIntervalSince1970
         trim()
+        UserDefaults.standard.set(self.items, forKey: self.KEY)
     }
     
     mutating func last() -> String? {
@@ -251,6 +264,11 @@ struct ClipboardStack {
     }
 }
 
+
+// utils
+func indexToButton(_ i: Int) -> String {
+    return i < 9 ? "\(i + 1)": i == 9 ? "0" : ""
+}
 
 
 // Utils

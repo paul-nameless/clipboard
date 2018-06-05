@@ -139,15 +139,10 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
             text = item.key
             cellIdentifier = CellId.clipboardCell
         } else if tableColumn == tableView.tableColumns[1] {
-//            text = dateFormatter.string(from: Date(timeIntervalSince1970: item.first!.value))
-            text = "\(item.value)"
+            text = toTimeAgo(Date(timeIntervalSince1970: item.value))
             cellIdentifier = CellId.timestampCell
         } else if tableColumn == tableView.tableColumns[2] {
-            if row < 10 {
-                text = "\(row)"
-            } else {
-                text = ""
-            }
+            text = row < 9 ? "⌘\(row + 1)": row == 9 ? "⌘0" : ""
             cellIdentifier = CellId.shortcutCell
         }
         
@@ -168,4 +163,29 @@ extension NSTextFieldCell {
 //    override open func drawingRect(forBounds rect: NSRect) -> NSRect {
 //        return NSRect(x: rect.minX + 10, y: rect.minY + 10, width: rect.width, height: 44)
 //    }
+}
+
+// utils
+
+func toTimeAgo(_ date: Date) -> String {
+    let interval = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date, to: Date())
+    if let year = interval.year, year > 0 {
+        return year == 1 ? "\(year)" + " " + "year" :
+            "\(year)" + " " + "years"
+    } else if let month = interval.month, month > 0 {
+        return month == 1 ? "\(month)" + " " + "month" :
+            "\(month)" + " " + "months"
+    } else if let day = interval.day, day > 0 {
+        return day == 1 ? "\(day)" + " " + "day" :
+            "\(day)" + " " + "days"
+    } else if let hour = interval.hour, hour > 0 {
+        return hour == 1 ? "\(hour)" + " " + "hour" :
+            "\(hour)" + " " + "hours"
+    } else if let minute = interval.minute, minute > 0 {
+        return minute == 1 ? "\(minute)" + " " + "minute" :
+            "\(minute)" + " " + "minutes"
+    } else {
+        return "a moment ago"
+        
+    }
 }
