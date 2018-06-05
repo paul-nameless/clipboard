@@ -7,13 +7,23 @@
 //
 
 import Cocoa
+import Carbon.HIToolbox
 
 class ClipboardHistoryViewController: NSViewController {
-    
-//    var items: [(key: String, value: Double)?] = []
-//    var stack: ClipboardStack?
+
     var appDelegate: AppDelegate? = nil
-    
+    let mapKeyCodeToNumber: [UInt16: Int] = [
+        0x12: 1,
+        0x13: 2,
+        0x14: 3,
+        0x15: 4,
+        0x17: 5,
+        0x16: 6,
+        0x1A: 7,
+        0x1C: 8,
+        0x19: 9,
+        0x1D: 0
+    ]
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var tableView: NSTableView!
 
@@ -26,10 +36,6 @@ class ClipboardHistoryViewController: NSViewController {
         self.view.layer?.cornerRadius = 24
         
         appDelegate = NSApplication.shared.delegate as? AppDelegate
-//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-//        stack = appDelegate.stack
-
-
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 44
@@ -53,8 +59,7 @@ class ClipboardHistoryViewController: NSViewController {
             if index == -1 {
                 return
             }
-            let appDelegate = NSApplication.shared.delegate as! AppDelegate
-            appDelegate.stack.remove(index)
+            appDelegate?.stack.remove(index)
             self.tableView.reloadData()
             tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
         case 0x24:
@@ -64,11 +69,18 @@ class ClipboardHistoryViewController: NSViewController {
             if index == -1 {
                 return
             }
-            let appDelegate = NSApplication.shared.delegate as! AppDelegate
-            appDelegate.pasteByIndex(index)
+            appDelegate?.pasteByIndex(index)
         case 0x35:
             // escape
             NSApp.hide(nil)
+        case 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x19, 0x1A, 0x1C, 0x1D:
+            // 0-9
+            let flags = event.modifierFlags
+            if flags.contains(NSEvent.ModifierFlags.command) {
+                NSApp.hide(nil)
+                let index = mapKeyCodeToNumber[event.keyCode]!
+                appDelegate?.pasteByIndex(index)
+            }
         default:
             return
         }
@@ -88,12 +100,16 @@ extension ClipboardHistoryViewController: NSTableViewDataSource {
 
 class MyNSTableRowView: NSTableRowView {
     
+    // Used to change selection color and round corners
     override func drawSelection(in dirtyRect: NSRect) {
         self.wantsLayer = true
         self.layer?.cornerRadius = 16
         if self.selectionHighlightStyle != .none {
             let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-            NSColor(calibratedWhite: 0.81, alpha: 1).setFill()
+            // gray
+//            NSColor(calibratedWhite: 0.81, alpha: 1).setFill()
+            // blue
+            NSColor(calibratedRed: 0.0/255, green: 122.0/255, blue: 254.0/255, alpha: 1.0).setFill()
             let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
             selectionPath.fill()
         }
