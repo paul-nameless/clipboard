@@ -87,7 +87,7 @@ class MyNSTableRowView: NSTableRowView {
         self.layer?.cornerRadius = 16
         if self.selectionHighlightStyle != .none {
             let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-            NSColor(calibratedWhite: 0.82, alpha: 1).setFill()
+            NSColor(calibratedWhite: 0.8, alpha: 1).setFill()
             let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 10, yRadius: 10)
             selectionPath.fill()
         }
@@ -120,21 +120,11 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .long
-        
-        // 1
-//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-//        if row >= appDelegate?.stack.items?.count {
-//            return nil
-//        }
+
         guard let item = appDelegate?.stack.getSorted()[row] else {
             return nil
         }
 
-//        guard let item = stack?.getSorted()[row] else {
-//            return nil
-//        }
-//
-        // 2
         if tableColumn == tableView.tableColumns[0] {
             text = item.key
             cellIdentifier = CellId.clipboardCell
@@ -146,7 +136,6 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
             cellIdentifier = CellId.shortcutCell
         }
         
-        // 3
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier),
                                          owner: nil) as? NSTableCellView {
             cell.textField?.stringValue = text
