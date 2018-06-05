@@ -79,17 +79,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func checkClipboard(_ sender: Any?) {
         if self.clipboardChangeCount != NSPasteboard.general.changeCount {
             self.clipboardChangeCount = NSPasteboard.general.changeCount
-            print("Clipboard value changed, updating values")
             if let clipboard = clipboardContent() {
-                stack.push(clipboard)
-                buildMenu()
+                if clipboard.count < 100_000_000 {
+                    stack.push(clipboard)
+                    buildMenu()
+                }
             }
         }
-    }
-    
-    // utils
-    func trunc(string: String, length: Int, trailing: String = "") -> String {
-        return (string.count > length) ? string.prefix(length) + trailing : string
     }
 
     // init
@@ -272,6 +268,12 @@ struct ClipboardStack {
 func indexToButton(_ i: Int) -> String {
     return i < 9 ? "\(i + 1)": i == 9 ? "0" : ""
 }
+
+// utils
+func trunc(string: String, length: Int, trailing: String = "") -> String {
+    return ((string.count > length) ? string.prefix(length) + trailing : string).replacingOccurrences(of: "\n", with: "⏎")
+}
+
 
 
 // Utils

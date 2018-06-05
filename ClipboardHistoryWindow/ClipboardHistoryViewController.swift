@@ -39,20 +39,15 @@ class ClipboardHistoryViewController: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-//        let appDelegate = NSApplication.shared.delegate as! AppDelegate
-//        items = appDelegate.stack.getSorted()
         self.tableView.reloadData()
         let indexSet = IndexSet.init(integer: 0)
         tableView.selectRowIndexes(indexSet, byExtendingSelection: false)
-        print("Here, updating")
         self.parent?.view.window?.title = self.title!
     }
     
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 0x24 {
             // enter
-            print("Handled enter press")
-//            self.parent?.view.window?.close()
             NSApp.hide(nil)
             let index = tableView.selectedRow
             if index == -1 {
@@ -62,7 +57,6 @@ class ClipboardHistoryViewController: NSViewController {
             appDelegate.pasteByIndex(index)
         } else if event.keyCode == 0x35 {
             // escape
-//            self.parent?.view.window?.close()
             NSApp.hide(nil)
         }
     }
@@ -131,7 +125,7 @@ extension ClipboardHistoryViewController: NSTableViewDelegate {
         }
 
         if tableColumn == tableView.tableColumns[0] {
-            text = item.key
+            text = truncForWindow(item.key)
             cellIdentifier = CellId.clipboardCell
         } else if tableColumn == tableView.tableColumns[1] {
             text = toTimeAgo(Date(timeIntervalSince1970: item.value))
@@ -163,6 +157,16 @@ extension NSTextFieldCell {
 }
 
 // utils
+
+func truncForWindow(_ string: String) -> String {
+    var str = string
+    if str.count > 1000 {
+        str = str.prefix(1000) + ""
+    }
+    str = str.replacingOccurrences(of: "\n", with: "⏎")
+    return str
+    
+}
 
 func toTimeAgo(_ date: Date) -> String {
     let interval = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date, to: Date())
