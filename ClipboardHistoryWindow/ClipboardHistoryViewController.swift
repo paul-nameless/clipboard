@@ -46,7 +46,18 @@ class ClipboardHistoryViewController: NSViewController {
     }
     
     override func keyDown(with event: NSEvent) {
-        if event.keyCode == 0x24 {
+        switch event.keyCode {
+        case 0x33:
+            // delete
+            let index = tableView.selectedRow
+            if index == -1 {
+                return
+            }
+            let appDelegate = NSApplication.shared.delegate as! AppDelegate
+            appDelegate.stack.remove(index)
+            self.tableView.reloadData()
+            tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+        case 0x24:
             // enter
             NSApp.hide(nil)
             let index = tableView.selectedRow
@@ -55,9 +66,11 @@ class ClipboardHistoryViewController: NSViewController {
             }
             let appDelegate = NSApplication.shared.delegate as! AppDelegate
             appDelegate.pasteByIndex(index)
-        } else if event.keyCode == 0x35 {
+        case 0x35:
             // escape
             NSApp.hide(nil)
+        default:
+            return
         }
     }
 }

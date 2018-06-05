@@ -229,6 +229,10 @@ struct ClipboardStack {
         }
     }
     
+    mutating func save() {
+        UserDefaults.standard.set(self.items, forKey: self.KEY)
+    }
+    
     mutating func trim() {
         if (items.count > maxCapacity) {
             for _ in 1...items.count - maxCapacity {
@@ -243,7 +247,7 @@ struct ClipboardStack {
     mutating func push(_ item: String) {
         items[item] = Date().timeIntervalSince1970
         trim()
-        UserDefaults.standard.set(self.items, forKey: self.KEY)
+        save()
     }
     
     mutating func last() -> String? {
@@ -260,6 +264,12 @@ struct ClipboardStack {
     
     mutating func getSorted() -> [(key: String, value: Double)] {
         return items.sorted { a, b in a.value > b.value }
+    }
+
+    mutating func remove(_ index: Int) {
+        let e = getSorted()[index]
+        items.removeValue(forKey: e.key)
+        save()
     }
 }
 
