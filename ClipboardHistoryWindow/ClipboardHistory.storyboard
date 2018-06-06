@@ -69,7 +69,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Oxb-F2-mg3">
-                                                                    <rect key="frame" x="14" y="0.0" width="95" height="17"/>
+                                                                    <rect key="frame" x="6" y="0.0" width="95" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="17" id="ySO-5c-JuT"/>
                                                                     </constraints>
@@ -81,7 +81,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="Oxb-F2-mg3" firstAttribute="leading" secondItem="lVH-if-Kmd" secondAttribute="leading" constant="16" id="TKV-31-fWD"/>
+                                                                <constraint firstItem="Oxb-F2-mg3" firstAttribute="leading" secondItem="lVH-if-Kmd" secondAttribute="leading" constant="8" id="TKV-31-fWD"/>
                                                                 <constraint firstItem="Oxb-F2-mg3" firstAttribute="centerY" secondItem="lVH-if-Kmd" secondAttribute="centerY" id="zVe-4n-JSR"/>
                                                             </constraints>
                                                             <connections>
@@ -144,7 +144,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nkO-XL-Tyg">
-                                                                    <rect key="frame" x="-67" y="0.0" width="95" height="17"/>
+                                                                    <rect key="frame" x="-71" y="0.0" width="95" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="Table View Cell" id="T9P-QX-GGm">
                                                                         <font key="font" metaFont="systemThin" size="13"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -154,7 +154,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="nkO-XL-Tyg" firstAttribute="centerY" secondItem="eqL-Ox-CX7" secondAttribute="centerY" id="1rx-aZ-7zv"/>
-                                                                <constraint firstAttribute="trailing" secondItem="nkO-XL-Tyg" secondAttribute="trailing" constant="4" id="GTd-eG-dI6"/>
+                                                                <constraint firstAttribute="trailing" secondItem="nkO-XL-Tyg" secondAttribute="trailing" constant="8" id="GTd-eG-dI6"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="nkO-XL-Tyg" id="4qW-q1-MDu"/>
