@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="6oX-zU-5rf">
             <objects>
-                <windowController id="BeV-Dr-FcJ" customClass="ClipboardHistoryWindowController" customModule="ClipHistory" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="BeV-Dr-FcJ" customClass="ClipboardHistoryWindowController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Clipboard" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="lol-Ci-NpO">
                         <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -30,7 +30,7 @@
         <!--Clipboard History View Controller-->
         <scene sceneID="3lk-Qq-q7c">
             <objects>
-                <viewController id="5KK-xW-zQP" customClass="ClipboardHistoryViewController" customModule="ClipHistory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5KK-xW-zQP" customClass="ClipboardHistoryViewController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="fTD-dM-noi">
                         <rect key="frame" x="0.0" y="0.0" width="555" height="322"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -107,16 +107,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             menuItem.tag = i
             menu.addItem(menuItem)
         }
-        menu.addItem(NSMenuItem(title: "ClipboardHistory",
-                                action: #selector(AppDelegate.showClipboardHistoryHandler(_:)),
-                                keyEquivalent: "H"))
+//        menu.addItem(NSMenuItem.separator())
+//        menu.addItem(NSMenuItem(title: "Clipboard",
+//                                action: #selector(AppDelegate.showClipboardHistoryHandler(_:)),
+//                                keyEquivalent: "V"))
+
+//        menu.addItem(NSMenuItem.separator())
+//        menu.addItem(NSMenuItem(title: "Clear", action: #selector(AppDelegate.clear(_:)), keyEquivalent: ""))
+//        menu.addItem(NSMenuItem(title: "Preferences...",
+//                                action: #selector(AppDelegate.showPreferences(_:)), keyEquivalent: ","))
+//        menu.addItem(NSMenuItem(title: "Clipboard", action: #selector(AppDelegate.showAbout(_:)), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Clear", action: #selector(AppDelegate.clear(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem(title: "Preferences...",
-                                action: #selector(AppDelegate.showPreferences(_:)), keyEquivalent: ","))
-        menu.addItem(NSMenuItem(title: "About", action: #selector(AppDelegate.showAbout(_:)), keyEquivalent: ""))
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "Q"))
+        menu.addItem(NSMenuItem(title: "Quit Clipboard", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "Q"))
         
         statusItem.menu = menu
     }
@@ -170,18 +172,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func pasteByIndex(_ index: Int) {
         if let content = stack.get(index: index) {
-            print("Content \(content)")
             let pb = NSPasteboard.init(name: NSPasteboard.Name.general)
             pb.clearContents()
             pb.string(forType: NSPasteboard.PasteboardType.string)
             pb.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-            let success = pb.setString(content, forType: NSPasteboard.PasteboardType.string)
-            print("Success \(success)")
+            pb.setString(content, forType: NSPasteboard.PasteboardType.string)
             self.send(self.KEY_V, useCommandFlag: true)
         }
     }
 
-    @objc func paste(_ sender: Any?) {
+    func pasteContent(_ content: String) {
+        let pb = NSPasteboard.init(name: NSPasteboard.Name.general)
+        pb.clearContents()
+        pb.string(forType: NSPasteboard.PasteboardType.string)
+        pb.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+        pb.setString(content, forType: NSPasteboard.PasteboardType.string)
         self.send(self.KEY_V, useCommandFlag: true)
 
     }
@@ -229,7 +234,7 @@ struct ClipboardStack {
         }
     }
     
-    mutating func save() {
+    func save() {
         UserDefaults.standard.set(self.items, forKey: self.KEY)
     }
     
@@ -250,11 +255,11 @@ struct ClipboardStack {
         save()
     }
     
-    mutating func last() -> String? {
+    func last() -> String? {
         return items.max { a, b in a.value > b.value }?.key
     }
     
-    mutating func get(index: Int) -> String? {
+    func get(index: Int) -> String? {
         let sortedItems = items.sorted { a, b in a.value > b.value }
         if index < sortedItems.count {
             return sortedItems[index].key
@@ -262,7 +267,7 @@ struct ClipboardStack {
         return nil
     }
     
-    mutating func getSorted() -> [(key: String, value: Double)] {
+    func getSorted() -> [(key: String, value: Double)] {
         return items.sorted { a, b in a.value > b.value }
     }
 

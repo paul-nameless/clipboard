@@ -65,11 +65,18 @@ class ClipboardHistoryViewController: NSViewController {
         case 0x24:
             // enter
             NSApp.hide(nil)
-            let index = tableView.selectedRow
-            if index == -1 {
+            if let history = appDelegate?.stack.getSorted() {
+                let flags = event.modifierFlags
+                var separator = " "
+                if flags.contains(NSEvent.ModifierFlags.command) {
+                    separator = "\n"
+                } else if flags.contains(NSEvent.ModifierFlags.option) {
+                    separator = ""
+                }
+                let clipboard = tableView.selectedRowIndexes.filter { $0 < history.count }.map { history[$0].key }.joined(separator: separator)
+                appDelegate?.pasteContent(clipboard)
                 return
             }
-            appDelegate?.pasteByIndex(index)
         case 0x35:
             // escape
             NSApp.hide(nil)
