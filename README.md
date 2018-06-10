@@ -15,13 +15,13 @@ Just go to releases tab (https://github.com/paul-nameless/clipboard/releases) an
 
 Here are usefull shortcuts to know: 
 
-* **Command+Shift+V** - show/hide clipboard history window
-* **Return** - paste selected test in the row. If multiple rows selected will paste them separated with one space " "
-* **Option+Return** - if multiple rows selected will join them and paste separated with no space
-* **Cmd+Return** - if multiple rows selected will join them and paste separated with new line character "\n"
-* **Delete** - delete selected text. If multiple selected will delete them all
-* **Option + arrow down** - go to the last row
-* **Option + arrow up** - go to the first row
+* `Command+Shift+V` - show/hide clipboard history window
+* `Return` - paste selected test in the row. If multiple rows selected will paste them separated with one space " "
+* `Option+Return` - if multiple rows selected will join them and paste separated with no space
+* `Cmd+Return` - if multiple rows selected will join them and paste separated with new line character "\n"
+* `Delete` - delete selected text. If multiple selected will delete them all
+* `Option + arrow down` - go to the last row
+* `Option + arrow up` - go to the first row
 
 ## Build
 
