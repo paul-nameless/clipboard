@@ -55,13 +55,15 @@ class ClipboardHistoryViewController: NSViewController {
         switch event.keyCode {
         case 0x33:
             // delete
-            let index = tableView.selectedRow
-            if index == -1 {
-                return
+            if let history = appDelegate?.stack.getSorted() {
+                let indexes = tableView.selectedRowIndexes
+                let itemsToDelete = indexes.filter { $0 < history.count }.map { history[$0].key }
+                for item in itemsToDelete {
+                    appDelegate?.stack.items.removeValue(forKey: item)
+                }
+                self.tableView.reloadData()
+                tableView.selectRowIndexes(IndexSet(integer: indexes.first ?? 0), byExtendingSelection: false)
             }
-            appDelegate?.stack.remove(index)
-            self.tableView.reloadData()
-            tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
         case 0x24:
             // enter
             NSApp.hide(nil)
