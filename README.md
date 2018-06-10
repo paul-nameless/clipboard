@@ -4,8 +4,8 @@ Clipboard manager for macOS. It saves clipboard history and when you need to pas
 
 ## Screenshots
 
-![screenshot of main window](https://raw.githubusercontent.com/paul-nameless/clipboard/master/screenshots/main_window.png)
-![program screenshot on desktop](https://raw.githubusercontent.com/paul-nameless/clipboard/master/screenshots/screenshot.png)
+<p align="center"><img src="https://raw.githubusercontent.com/paul-nameless/clipboard/master/screenshots/main_window.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/paul-nameless/clipboard/master/screenshots/screenshot.png"></p>
 
 ## Install
 
