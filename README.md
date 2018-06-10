@@ -4,7 +4,7 @@ Clipboard manager for macOS. It saves clipboard history and when you need to pas
 
 ## Install
 
-Just go to releases tab and download latest build or build it yourself in xcode, it is very easy.
+Just go to releases tab (https://github.com/paul-nameless/clipboard/releases) and download latest build or build it yourself in xcode, it is very easy.
 
 ## Shortcuts
 
@@ -23,7 +23,7 @@ Here are usefull shortcuts to know:
 You need to install Xcode firstly.
 
 ```
-git clone [link]
-cd Clipboard
+git clone https://github.com/paul-nameless/clipboard.git
+cd clipboard
 xcodebuild -project ClipHistory.xcodeproj -alltargets -configuration Release
 ```
